@@ -1,0 +1,44 @@
+// verically align middle
+.u-table {
+  display: table;
+  width: 100%;
+}
+
+.u-table-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+.u-hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+.u-visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+// Clearfix
+.u-clearfix:before,
+.u-clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.u-clearfix:after {
+  clear: both;
+}
+
+// For testing
+.u-test {
+  outline: 1px solid red;
+}

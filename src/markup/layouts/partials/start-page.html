@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{.Language}}">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ .Hugo.Generator }}
+
+    <title>
+      {{- if .IsHome -}}
+      {{ .Site.Title }}
+      {{- else if eq .Kind "taxonomy" -}}
+      {{ .Data.Singular | title }}: {{ .Title }} - {{ .Site.Title }}
+      {{- else if ( or .IsNode .IsPage ) -}}
+      {{ .Title }} - {{ .Site.Title }}
+      {{- end -}}
+    </title>
+
+    <meta name="description" content="
+    {{- if .IsPage -}}
+      {{- if .Description -}}
+      {{ .Description }}
+      {{- else -}}
+      {{ .Summary }}
+      {{- end -}}
+    {{- else if .IsHome -}}
+      {{ .Site.Params.Description }}
+    {{- end -}}
+    ">
+
+    <link rel="icon" type="image/png"href="{{ "favicon.png" | relURL }}" sizes="16x16">
+    <link rel="stylesheet" href="{{ "css/styles.css" | relURL }}" />
+  </head>
+  <body>

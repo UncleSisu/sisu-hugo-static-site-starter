@@ -1,0 +1,15 @@
+@import 'vars';
+@import 'reset';
+@import 'utilities';
+
+// common
+@import 'common/header';
+@import 'common/footer';
+
+html,
+body {
+  height: 100%;
+  font-family: serif;
+  -webkit-font-smoothing: antialiased;
+  color: $blue;
+}

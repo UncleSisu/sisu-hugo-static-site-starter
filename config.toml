@@ -1,0 +1,20 @@
+# https://gohugo.io/overview/configuration/
+
+baseurl = "/"
+languageCode = "en-us"
+title = "Steven Waller"
+
+# Directory locations
+publishDir = "dist"
+archetypeDir = "src/markup/archetypes"
+contentDir = "src/markup/content"
+dataDir = "src/markup/data"
+layoutDir = "src/markup/layouts"
+themesDir = "src/markup/themes"
+
+# Use TOML for front matter
+metaDataFormat = "toml"
+
+# Taxonomies
+# Leave empty to remove Category and Tags
+[taxonomies]

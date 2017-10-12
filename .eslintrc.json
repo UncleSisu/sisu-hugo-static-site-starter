@@ -1,0 +1,40 @@
+{
+  "extends": [
+    "eslint-config-airbnb"
+  ],
+  "parser": "babel-eslint",
+  "settings": {
+    "ecmascript": 6
+  },
+  "env": {
+    "browser": true
+  },
+  "plugins": [
+    "import"
+  ],
+  "globals": {
+    "__dirname": true,
+    "require": true,
+    "process": true,
+    "ENV": true,
+    "module": true
+  },
+  "rules": {
+    "no-console": 0,
+    "func-names": 0,
+    "comma-dangle": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-unresolved": 0,
+    "import/no-named-as-default": 0,
+    "import/first": 0,
+    "import/extensions": 0,
+    "no-use-before-define": 0,
+    "no-underscore-dangle": 0,
+    "no-unused-vars": 1,
+    "no-trailing-spaces": 1,
+    "eol-last": 1,
+    "semi": 1,
+    "arrow-body-style": 0
+  }
+}
+

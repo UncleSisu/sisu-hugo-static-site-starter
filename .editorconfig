@@ -1,0 +1,24 @@
+# http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# HTML
+[*.html]
+indent_style = space
+indent_size = 2
+
+# Javascript
+[*.{js,tsx,ts}]
+indent_style = space
+indent_size = 2
+
+# JSON
+[*.json]
+indent_style = space
+indent_size = 2
+
+# CSS
+[*.{css,less,sass}]
+indent_style = space
+indent_size = 2
