@@ -15,7 +15,7 @@ import webpack from 'webpack';
 import webpackConfig from './webpack.conf';
 
 const browserSync = BrowserSync.create();
-const hugoBin = 'hugo';
+const hugoBin = `./bin/hugo.${process.platform === 'win32' ? 'exe' : process.platform}`;
 
 // location of static files to copy over
 // const staticFiles = [
