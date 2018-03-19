@@ -29,7 +29,7 @@ export default {
   // ----------------------------------------------------------- //
   // Tell webpack where to start and follows the graph of dependencies
   // so it knows what to bundle
-  // to bundle multiple files into one:
+  // To bundle multiple files into one:
   // entry: {
   //   myBundleName: ['./home.js', './events.js', './vendor.js']
   // }
@@ -90,7 +90,7 @@ export default {
   // Optimization
   // ----------------------------------------------------------- //
   optimization: {
-    // Split all the files from node_modules into a separate vendor file
+    // Split all the files imported from node_modules into a separate vendor file
     splitChunks: {
       cacheGroups: {
         commons: {
