@@ -7,6 +7,9 @@ Webpack as your asset pipeline. Initially based on [victor-hugo](https://github.
 ## Stack
 
 ### Client
+- [jQuery](https://jquery.com/) - Get off my lawn!
+- [Lodash](https://lodash.com/) - Little utilities like throttle/debounce
+- [Postal](https://github.com/postaljs/postal.js) - pub/sub library to allow decoupled communication between components
 - [Modernizr](https://modernizr.com) - Browser feature detection (touch-events)
 
 ### Development
