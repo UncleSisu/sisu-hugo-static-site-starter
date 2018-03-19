@@ -17,14 +17,13 @@ Webpack as your asset pipeline. Initially based on [victor-hugo](https://github.
 - [Hugo](https://gohugo.io/) - Generate static site
 - [Gulp](http://gulpjs.com/) - Efficient, configurable, streaming task runner
 - [BrowserSync](https://www.browsersync.io/) - Live reload changes
-- [Webpack 2.6](https://webpack.github.io) - Automatic common module chunk bundling and tree shaking
+- [Webpack](https://webpack.github.io) - Automatic common module chunk bundling and tree shaking
 - [Babel](https://babeljs.io/) - Use the latest ECMAScript features
 - [Sass](http://sass-lang.com/) - Easier CSS dev with variables, nesting, partials, import, mixins, inheritance, and operators
 - [PostCSS](http://postcss.org/) - Autoprefix CSS
 - [ESLint](http://eslint.org/) - Catch syntax and style issues
 
 ## To Do
-- [ ] Type checking with Flow
 - [ ] Progressive web app with offline support?
 - [ ] Adjust Gulp to only update changed files
 - [ ] Improve Readme documentation
@@ -32,7 +31,6 @@ Webpack as your asset pipeline. Initially based on [victor-hugo](https://github.
 
 ## Get Started
 
-1. Install [Hugo](http://gohugo.io/overview/installing/)
 1. Install [Node v6.9+](https://nodejs.org/en/) globally if you don't have it already
 1. Install [Yarn](https://yarnpkg.com/) globally if you don't have it already
 1. Clone or download this repo
@@ -54,7 +52,9 @@ Webpack as your asset pipeline. Initially based on [victor-hugo](https://github.
 
 ## Project Structure
 
+- **bin** - Hugo binary files. (Darwin == Mac). Included so build works with Netlify.
 - **dist** - Files compiled by the Gulp/Hugo build pipeline
+- **i18n** - Hugo multilingual configurations
 - **src** - Files that will pass through the Gulp/Hugo build pipeline and be output in the `dist` directory
 	- **data** - Custom data in YAML/JSON/TOML files to be used in templates, shortcodes, and javascript
 	- **docs** - PDFs and other static files that can be linked to. Copied over to the `dist` directory
