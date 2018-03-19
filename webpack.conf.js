@@ -10,70 +10,19 @@ const outputPath = path.join(__dirname, './dist/js');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = nodeEnv === 'production';
 
-// Plugins
-// ----------------------------------------------------------- //
-const plugins = [
-  // Allow you to reference environment variables through process.env
-  new webpack.EnvironmentPlugin({
-    NODE_ENV: nodeEnv
-  }),
-
-  // Prints more readable module names in the browser console on HMR updates
-  // prevent ID's from changing, invalidating the cache
-  new webpack.NamedModulesPlugin(),
-
-  // Generates chunks of common modules shared between entry points
-  // and splits them into separate bundles
-  new webpack.optimize.CommonsChunkPlugin({
-    name: ['vendor', 'manifest'],
-    minChunks: Infinity
-  })
-];
-
-// add to plugins array based on prod/dev environment
-// If in production
-if (isProd) {
-  plugins.push(
-    // minify the code
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
-    // and uglify it
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true
-      },
-      output: {
-        comments: false
-      }
-    })
-  );
-// if in development mode
-} else {
-  // add dev plugins here
-}
-
 export default {
+  // Mode
+  // ----------------------------------------------------------- //
+  mode: nodeEnv,
+
   // DevTools
   // ----------------------------------------------------------- //
-  // add support for the Chrome DevTools Extension
-  // use eval in prod to see compiled output
-  // use source maps if in dev
-  devtool: isProd ? 'cheap-source-map' : 'cheap-module-eval-source-map',
+  // Use external source maps for production and inline for dev
+  devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
 
   // Context
   // ----------------------------------------------------------- //
-  // start in our source path directory
+  // Start in our source path directory
   context: sourcePath,
 
   // Entry
@@ -84,45 +33,34 @@ export default {
   // entry: {
   //   myBundleName: ['./home.js', './events.js', './vendor.js']
   // }
-  // multiple files with multiple outputs:
+  // Multiple files with multiple outputs:
   // entry: {
   //   fileNameOne: './file.js',
   //   fileNameTwo: './anotherFile.js'
   // }
   entry: {
-    // dev files
     scripts: [
       './scripts/scripts.js'
-    ],
-    // vendor files
-    // manually tell webpack to group certain files
-    // instead of just relying on the CommonsChunkPlugin
-    vendor: [
-      'jquery',
-      'jquery.easing',
-      'modernizr',
-      'postal'
     ]
   },
 
   // Output
   // ----------------------------------------------------------- //
-  // where the files will be saved to
+  // Where the files will be saved to
   output: {
     path: outputPath,
     publicPath: '/',
     filename: '[name].js',
-    chunkFilename: '[name].chunk.js',
+    chunkFilename: '[name].js',
     sourceMapFilename: '[file].map'
   },
 
   // Resolve
   // ----------------------------------------------------------- //
-  // help webpack resolve import statements
+  // Help webpack resolve import statements
   // e.g. import React from 'react';
   resolve: {
-    // define file extensions
-    // so you can leave them off when importing
+    // Define file extensions so you can leave them off when importing
     extensions: [
       '.webpack-loader.js',
       '.web-loader.js',
@@ -130,17 +68,37 @@ export default {
       '.js'
     ],
 
-    // tell webpack where to find files
-    // allows you to include them without the full path
+    // Tell webpack where to find files
+    // Allows you to include them without the full path
     modules: [
       path.resolve(__dirname, 'node_modules'),
       sourcePath
     ],
 
+    // Manually tell webpack where older library files are
+    // so they will work with modern imports like:
+    // import OldLibrary from 'old-library';
     alias: {
+      // Use .modernizrrc instead of full library to create a custom build
+      // See loader below
       modernizr$: path.resolve(__dirname, '.modernizrrc'),
       postal: path.resolve('node_modules', 'postal/lib/postal.lodash.js'),
       Easing: path.resolve('node_modules', 'gsap/src/uncompressed/easing/EasePack.js')
+    }
+  },
+
+  // Optimization
+  // ----------------------------------------------------------- //
+  optimization: {
+    // Split all the files from node_modules into a separate vendor file
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
     }
   },
 
@@ -179,9 +137,13 @@ export default {
     ]
   },
 
-  // see plugins setup above
+  // Plugins
   // ----------------------------------------------------------- //
-  plugins,
+  plugins: [
+    // Hash module IDs so changing local imports won't effect the vendor file's cache
+    // https://webpack.js.org/guides/caching/
+    new webpack.HashedModuleIdsPlugin()
+  ],
 
   // Stats
   // ----------------------------------------------------------- //
