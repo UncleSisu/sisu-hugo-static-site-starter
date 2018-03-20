@@ -15,6 +15,12 @@ themesDir = "src/markup/themes"
 # Use TOML for front matter
 metaDataFormat = "toml"
 
+# Outputs
+# Save home page as JSON and use that to create an searchable index of the site
+[outputs]
+  home = [ "HTML", "JSON"]
+  page = [ "HTML"]
+
 # Taxonomies
 # Leave empty to remove Category and Tags
 [taxonomies]

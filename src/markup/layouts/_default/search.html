@@ -1,0 +1,10 @@
+{{ partial "start-page" . }}
+{{ partial "site-header" . }}
+{{ .Content }}
+<h1>Search</h1>
+<input id="search" type="text" id="searchbox" placeholder="Just start typing...">
+
+<h3>Results</h3>
+<ul id="results"></ul>
+{{ partial "site-footer" . }}
+{{ partial "end-page" . }}
