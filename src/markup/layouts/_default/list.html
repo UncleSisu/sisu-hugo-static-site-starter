@@ -1,5 +1,11 @@
 {{ partial "start-page" . }}
 <article>
   {{ with .Content }}{{.}}{{ end }}
+
+  {{ range .Data.Pages }}
+    <li>
+      <a href="{{.Permalink}}">{{.Date.Format "2006-01-02"}} | {{.Title}}</a>
+    </li>
+  {{ end }}
 </article>
 {{ partial "end-page" . }}
